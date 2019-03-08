@@ -14,16 +14,11 @@ bar {
         font pango:monospace 12
 	status_command i3blocks -c ~/.config/i3/i3blocks.conf
 	colors {
-		background $bg_color
+		background #191919
 
 	}
+	separator_symbol ")"
 }
-
-#Constantly update urxvt
-exec_always --no-startup-id xrdb ~/.Xresources
-
-#Disable Touchscreen(A script I made.)
-exec_always --no-startup-id disabletouchscreen
 
 #Font
 font pango:monospace 12
@@ -39,7 +34,7 @@ set $mod Mod4
 floating_modifier $mod
 
 #Terminal
-set $term urxvt
+set $term st
 bindsym $mod+Return exec $term
 bindsym $mod+Shift+Return exec $term -e tmux
 
@@ -73,7 +68,7 @@ bindsym $mod+q kill
 bindsym $mod+Shift+q kill
 
 #Open IRC[w]
-bindsym $mod+w exec $term -e weechat
+bindsym $mod+w exec $term -e proxychains weechat
 
 #View CPU processes[W]
 bindsym $mod+Shift+w exec $term -e htop
@@ -149,15 +144,21 @@ bindsym $mod+c exec $term -e vim ~/.config/i3/config
 bindsym $mod+Shift+c reload
 
 #Open up Virtual Box[v]
-#bindsym $mod+v exec --no-startup-id virtualbox
-#assign [class="VirtualBox"] $workspace4
+bindsym $mod+v exec --no-startup-id virtualbox
+assign [class="VirtualBox Manager"] $workspace4
 
 #Open Firefox on Workspace 2[b]
 bindsym $mod+b exec --no-startup-id firefox 
 assign [class="Firefox"] $workspace2
 
+#bindsym $mod+b exec --no-startup-id qutebrowser
+#assign [class="qutebrowser"] $workspace2
+
+#Open Tor Browser[B]
+bindsym $mod+Shift+b exec --no-startup-id tor-browser
+
 #Lock Screen[X]
-bindsym $mod+Shift+x exec i3lock -f
+bindsym $mod+Shift+x exec i3lock -c 002211 -f
 
 #Boot cmus[m]
 #bindsym $mod+m exec $term -e cmus
@@ -195,8 +196,8 @@ bindsym $mod+Shift+Right move right 10
 bindsym $mod+Shift+space floating toggle
 
 #Brightness
-#bindsym XF86MonBrightnessUp exec xbacklight -inc 10
-#bindsym XF86MonBrightnessDown exec xbacklight -dec 10
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 
 #Volume
 bindsym XF86AudioRaiseVolume exec amixer -q -c 1 set Master 2dB+ unmute
@@ -213,7 +214,7 @@ bindsym XF86Help exec --no-startup-id echo "help" > /dev/null
 
 #Workspaces
 set $workspace1 "1:Home"
-set $workspace2 "2:Firefox"
+set $workspace2 "2:Browser"
 set $workspace3 "3:Coding"
 set $workspace4 "4:VMs"
 set $workspace5 "5:Reading"
